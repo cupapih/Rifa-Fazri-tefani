@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Rifa 💖</title>
+
+<style>
+body{
+    margin:0;
+    font-family:'Comic Sans MS', cursive;
+    background:linear-gradient(135deg,#ff9ecf,#ffd6ec,#ffe6f5);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    text-align:center;
+}
+
+.card{
+    background:white;
+    padding:40px;
+    border-radius:30px;
+    box-shadow:0 15px 40px rgba(255,0,130,.3);
+    position:relative;
+    max-width:350px;
+}
+
+h1{color:#ff4f9a;}
+p{color:#555;}
+
+button{
+    border:none;
+    padding:12px 28px;
+    font-size:18px;
+    border-radius:50px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+#yes{
+    background:#ff4f9a;
+    color:white;
+}
+
+#no{
+    background:#eee;
+    color:#666;
+    position:absolute;
+}
+
+.gift{
+    display:none;
+    animation:pop 1s;
+}
+
+@keyframes pop{
+    from{opacity:0; transform:scale(.4)}
+    to{opacity:1; transform:scale(1)}
+}
+
+/* hearts animation */
+.heart{
+    position:absolute;
+    animation:float 5s linear infinite;
+}
+
+@keyframes float{
+    from{transform:translateY(0); opacity:1}
+    to{transform:translateY(-800px); opacity:0}
+}
+
+.gif{
+    width:90px;
+    margin:10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIK -->
+<audio autoplay loop>
+<source src="https://files.catbox.moe/2y0h5o.mp3" type="audio/mp3">
+</audio>
+
+<div class="card">
+
+<div id="question">
+    <h1>💖 Rifa Fazri Stefani 💖</h1>
+    <p>Mau jadi Valentine aku selamanya? 🥺</p>
+
+    <button id="yes">YES 💕</button>
+    <button id="no">NO 😝</button>
+</div>
+
+<div class="gift" id="gift">
+
+    <h1>YAYYYY RIFA ❤️</h1>
+
+    <p style="font-size:20px">
+    Kamu itu alasan aku bahagia setiap hari 💖<br>
+    Senyummu bikin dunia jadi lebih indah ✨<br>
+    Aku sayang kamu lebih dari kata-kata 🥰<br>
+    Semoga kita selalu bersama selamanya 💕
+    </p>
+
+    <!-- STIKER GIF LUCU -->
+    <div>
+        <img class="gif" src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
+        <img class="gif" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
+        <img class="gif" src="https://media.giphy.com/media/11sBLVxNs7v6WA/giphy.gif">
+    </div>
+
+</div>
+
+</div>
+
+<script>
+const yes = document.getElementById("yes");
+const no = document.getElementById("no");
+const gift = document.getElementById("gift");
+const question = document.getElementById("question");
+
+let size = 1;
+
+// tombol NO kabur + YES membesar
+no.addEventListener("mouseover",()=>{
+    const x=Math.random()*(window.innerWidth-100);
+    const y=Math.random()*(window.innerHeight-100);
+
+    no.style.left=x+"px";
+    no.style.top=y+"px";
+
+    size+=0.25;
+    yes.style.transform="scale("+size+")";
+});
+
+// klik YES
+yes.onclick=()=>{
+    question.style.display="none";
+    gift.style.display="block";
+
+    // hujan hati
+    setInterval(()=>{
+        let h=document.createElement("div");
+        h.innerHTML="💖";
+        h.className="heart";
+        h.style.left=Math.random()*100+"vw";
+        h.style.top="100vh";
+        h.style.fontSize=(20+Math.random()*40)+"px";
+        document.body.appendChild(h);
+
+        setTimeout(()=>h.remove(),5000);
+    },250);
+};
+</script>
+
+</body>
+</html>
