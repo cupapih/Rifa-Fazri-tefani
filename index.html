@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Untuk sayang nya aku 💖</title>
+<title>Untuk Sayangku 💖</title>
 
 <style>
 body{
@@ -39,28 +39,16 @@ button{
     transition:.3s;
 }
 
-#yes{
-    background:#ff4f9a;
-    color:white;
-}
+#yes{background:#ff4f9a;color:white;}
+#no{background:#eee;color:#666;position:absolute;}
 
-#no{
-    background:#eee;
-    color:#666;
-    position:absolute;
-}
-
-.gift{
-    display:none;
-    animation:pop 1s;
-}
+.gift{display:none;animation:pop 1s;}
 
 @keyframes pop{
     from{opacity:0; transform:scale(.4)}
     to{opacity:1; transform:scale(1)}
 }
 
-/* hearts animation */
 .heart{
     position:absolute;
     animation:float 5s linear infinite;
@@ -80,9 +68,9 @@ button{
 
 <body>
 
-<!-- MUSIK -->
-<audio autoplay loop>
-<source src="https://files.catbox.moe/2y0h5o.mp3" type="audio/mp3">
+<!-- MUSIK AUTOPLAY -->
+<audio id="bgm" autoplay loop muted>
+    <source src="https://files.catbox.moe/2y0h5o.mp3" type="audio/mp3">
 </audio>
 
 <div class="card">
@@ -106,7 +94,6 @@ button{
     Semoga kita selalu bersama selamanya 💕
     </p>
 
-    <!-- STIKER GIF LUCU -->
     <div>
         <img class="gif" src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
         <img class="gif" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
@@ -122,8 +109,17 @@ const yes = document.getElementById("yes");
 const no = document.getElementById("no");
 const gift = document.getElementById("gift");
 const question = document.getElementById("question");
+const bgm = document.getElementById("bgm");
 
 let size = 1;
+
+// FIX AUTOPLAY HP
+function playMusic(){
+    bgm.muted = false;
+    bgm.play();
+}
+document.body.addEventListener("click", playMusic);
+document.body.addEventListener("touchstart", playMusic);
 
 // tombol NO kabur + YES membesar
 no.addEventListener("mouseover",()=>{
@@ -139,10 +135,10 @@ no.addEventListener("mouseover",()=>{
 
 // klik YES
 yes.onclick=()=>{
+    playMusic();
     question.style.display="none";
     gift.style.display="block";
 
-    // hujan hati
     setInterval(()=>{
         let h=document.createElement("div");
         h.innerHTML="💞";
