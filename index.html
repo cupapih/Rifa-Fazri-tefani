@@ -68,9 +68,9 @@ button{
 
 <body>
 
-<!-- MUSIK AUTOPLAY -->
-<audio id="bgm" autoplay loop muted>
-    <source src="https://files.catbox.moe/2y0h5o.mp3" type="audio/mp3">
+<!-- MUSIK DARI FILE SENDIRI -->
+<audio id="bgm" loop>
+    <source src="Westlife_-_Beautiful_In_White_(mp3.pm).mp3" type="audio/mp3">
 </audio>
 
 <div class="card">
@@ -90,8 +90,7 @@ button{
     <p style="font-size:20px">
     Kamu itu alasan aku bahagia setiap hari 💖<br>
     Senyummu bikin dunia jadi lebih indah ✨<br>
-    Aku sayang kamu lebih dari kata-kata 🥰<br>
-    Semoga kita selalu bersama selamanya 💕
+    Aku sayang kamu lebih dari kata-kata 🥰
     </p>
 
     <div>
@@ -105,37 +104,37 @@ button{
 </div>
 
 <script>
+const bgm = document.getElementById("bgm");
 const yes = document.getElementById("yes");
 const no = document.getElementById("no");
 const gift = document.getElementById("gift");
 const question = document.getElementById("question");
-const bgm = document.getElementById("bgm");
 
 let size = 1;
 
-// FIX AUTOPLAY HP
-function playMusic(){
-    bgm.muted = false;
+/* AUTOPLAY FIX HP */
+function startMusic(){
     bgm.play();
+    document.removeEventListener("click", startMusic);
+    document.removeEventListener("touchstart", startMusic);
 }
-document.body.addEventListener("click", playMusic);
-document.body.addEventListener("touchstart", playMusic);
 
-// tombol NO kabur + YES membesar
+document.addEventListener("click", startMusic);
+document.addEventListener("touchstart", startMusic);
+
+/* tombol NO kabur */
 no.addEventListener("mouseover",()=>{
     const x=Math.random()*(window.innerWidth-100);
     const y=Math.random()*(window.innerHeight-100);
-
     no.style.left=x+"px";
     no.style.top=y+"px";
-
     size+=0.25;
     yes.style.transform="scale("+size+")";
 });
 
-// klik YES
+/* klik YES */
 yes.onclick=()=>{
-    playMusic();
+    bgm.play();
     question.style.display="none";
     gift.style.display="block";
 
@@ -147,7 +146,6 @@ yes.onclick=()=>{
         h.style.top="100vh";
         h.style.fontSize=(20+Math.random()*40)+"px";
         document.body.appendChild(h);
-
         setTimeout(()=>h.remove(),5000);
     },250);
 };
