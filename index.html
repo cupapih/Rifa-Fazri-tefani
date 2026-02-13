@@ -18,7 +18,6 @@ body{
     text-align:center;
 }
 
-/* CARD */
 .card{
     background:rgba(255,255,255,0.15);
     backdrop-filter: blur(12px);
@@ -28,7 +27,6 @@ body{
     max-width:350px;
 }
 
-/* FOTO EFFECT */
 .photo{
     width:130px;
     height:130px;
@@ -45,14 +43,12 @@ body{
     to{transform:scale(1.1)}
 }
 
-/* TEXT */
 .typing{
     min-height:70px;
     color:white;
     font-weight:bold;
 }
 
-/* BUTTON */
 button{
     border:none;
     padding:12px 28px;
@@ -86,7 +82,6 @@ button{
     margin:10px;
 }
 
-/* HEART FALL */
 .heart{
     position:absolute;
     animation:fall 5s linear infinite;
@@ -97,7 +92,6 @@ button{
     to{transform:translateY(900px); opacity:0}
 }
 
-/* SPARKLE */
 .star{
     position:absolute;
     animation:twinkle 3s infinite;
@@ -113,7 +107,8 @@ button{
 
 <body>
 
-<audio autoplay loop>
+<!-- AUDIO FIX -->
+<audio id="bgm" loop>
 <source src="Westlife_-_Beautiful_In_White_(mp3.pm).mp3" type="audio/mp3">
 </audio>
 
@@ -121,7 +116,7 @@ button{
 
 <div id="question">
 
-<img src="foto.jpg" class="photo">
+<img src="rifa.jpg" class="photo">
 
 <h2 class="typing" id="typing"></h2>
 
@@ -132,16 +127,15 @@ button{
 
 <div class="gift" id="gift">
 
-<img src="rifa.jpg" class="photo">
+<img src="foto.jpg" class="photo">
 
 <h1 style="color:#ff2d87">Aku Sayang Kamu ❤️</h1>
 
 <p style="color:white">
 Kamu alasan aku bahagia setiap hari 💖<br>
 kamu bukan cuman sekedar pacar 🥹<br>
-tapi kamu jawaban dari do'a terbaik aku<br>
-kamu kalo lagi sedih, harus inget ada aku buat kamu <br>
-Ada aku yang selalu sayang kamu lebih dari apapun 🥺<br>
+tapi kamu jawaban dari doa terbaik aku<br>
+kalau kamu sedih, inget ada aku selalu<br>
 Aku sayang kamu selamanya 🥰🫶
 </p>
 
@@ -168,7 +162,7 @@ function typing(){
 }
 typing();
 
-/* BUTTON LOGIC */
+/* BUTTON */
 const yes=document.getElementById("yes");
 const no=document.getElementById("no");
 const gift=document.getElementById("gift");
@@ -185,11 +179,25 @@ no.addEventListener("mouseover",()=>{
  yes.style.transform="scale("+size+")";
 });
 
+/* CLICK YES */
 yes.onclick=()=>{
  question.style.display="none";
  gift.style.display="block";
 
- /* HUJAN HATI */
+ // PLAY MUSIK + FADE IN
+ const bgm=document.getElementById("bgm");
+ bgm.volume=0;
+ bgm.play();
+
+ let vol=0;
+ const fade=setInterval(()=>{
+   if(vol<1){
+     vol+=0.02;
+     bgm.volume=vol;
+   }else clearInterval(fade);
+ },100);
+
+ // HUJAN HATI
  setInterval(()=>{
   let h=document.createElement("div");
   h.innerHTML="💖";
