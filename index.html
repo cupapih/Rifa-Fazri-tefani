@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Untuk Rifa Fazri tefani 💖</title>
+<title>Rifa Fazri Tefani 💖</title>
 
 <style>
 body{
@@ -18,13 +18,28 @@ body{
     text-align:center;
 }
 
+/* SPARKLE STARS */
+.star{
+    position:absolute;
+    background:white;
+    border-radius:50%;
+    animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+    from{opacity:0.2; transform:scale(0.5)}
+    to{opacity:1; transform:scale(1.2)}
+}
+
 /* CARD */
 .card{
     background:white;
     padding:40px;
     border-radius:30px;
     box-shadow:0 20px 50px rgba(255,0,130,.3);
-    max-width:360px;
+    max-width:380px;
+    position:relative;
+    z-index:2;
 }
 
 /* FOTO */
@@ -40,11 +55,17 @@ body{
     to{transform:scale(1.1)}
 }
 
-/* TEXT KETIK */
+/* TEXT */
 .typing{
-    font-size:22px;
+    font-size:20px;
     color:#ff4f9a;
-    min-height:60px;
+    min-height:120px;
+}
+
+/* GIF */
+.gif{
+    width:90px;
+    margin:10px;
 }
 
 /* HEART */
@@ -58,7 +79,6 @@ body{
     to{transform:translateY(-900px);opacity:0}
 }
 
-/* BUTTON */
 button{
     border:none;
     padding:14px 30px;
@@ -73,33 +93,58 @@ button{
 
 <body>
 
-<!-- LAGU -->
+<!-- MUSIK -->
 <audio id="bgm" loop>
 <source src="Westlife_-_Beautiful_In_White_(mp3.pm).mp3" type="audio/mp3">
 </audio>
 
-<div class="card" id="card">
+<div class="card">
 
-<h2 class="typing" id="typing"></h2>
+<div id="open">
+    <h2>💖 Coba buka Sayang 💖</h2>
+    <button onclick="startLove()">Buka Pesan ❤️</button>
+</div>
 
-<img src="rifa.jpg" class="photo">
+<div id="content" style="display:none">
 
-<button onclick="startLove()">Buka Pesan ❤️</button>
+    <h2 class="typing" id="typing"></h2>
+
+    <img src="rifa.jpg" class="photo">
+
+    <div>
+        <img class="gif" src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
+        <img class="gif" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
+        <img class="gif" src="https://media.giphy.com/media/11sBLVxNs7v6WA/giphy.gif">
+    </div>
+
+</div>
 
 </div>
 
 <script>
+/* BINTANG SPARKLE */
+for(let i=0;i<120;i++){
+ let s=document.createElement("div");
+ s.className="star";
+ s.style.width=s.style.height=(Math.random()*3+1)+"px";
+ s.style.left=Math.random()*100+"vw";
+ s.style.top=Math.random()*100+"vh";
+ s.style.animationDuration=(Math.random()*3+2)+"s";
+ document.body.appendChild(s);
+}
+
+/* TEXT */
 const text = [
- "Hai Sayang Ku 🥰",
- "Aku mau bilang sesuatu…",
+ "Hai Sayang ku…",
+ "Aku cuma mau bilang…",
  "Terima kasih sudah hadir di hidupku…",
  "Kamu itu alasan aku tersenyum setiap hari…",
- "Tanpamu dunia terasa sepi…",
+ "Kalau dunia gelap… kamu cahaya aku…",
  "Aku sayang kamu…",
- "Hari ini… besok… dan selamanya ❤️"
+ "Hari ini, besok, dan selamanya ❤️"
 ];
 
-let i=0, j=0;
+let i=0,j=0;
 const typing=document.getElementById("typing");
 
 function type(){
@@ -111,31 +156,31 @@ function type(){
   }else{
    typing.innerHTML+="<br>";
    i++; j=0;
-   setTimeout(type,900);
+   setTimeout(type,800);
   }
  }
 }
 
-type();
-
-/* START LOVE MODE */
 function startLove(){
+
+ document.getElementById("open").style.display="none";
+ document.getElementById("content").style.display="block";
 
  const bgm=document.getElementById("bgm");
  bgm.volume=0;
  bgm.play();
 
- // fade in musik
  let v=0;
  const fade=setInterval(()=>{
    if(v<1){ v+=0.02; bgm.volume=v; }
    else clearInterval(fade);
  },100);
 
- // hujan hati
+ type();
+
  setInterval(()=>{
   let h=document.createElement("div");
-  h.innerHTML="💖";
+  h.innerHTML="💞";
   h.className="heart";
   h.style.left=Math.random()*100+"vw";
   h.style.top="100vh";
@@ -143,7 +188,6 @@ function startLove(){
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),6000);
  },200);
-
 }
 </script>
 
