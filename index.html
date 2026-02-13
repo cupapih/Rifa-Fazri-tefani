@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Untuk Sayangku 💖</title>
+<title>Untuk Rifa Fazri Tefani 💖</title>
 
 <style>
 body{
     margin:0;
-    font-family:'Comic Sans MS', cursive;
+    font-family:'Poppins',sans-serif;
     background:linear-gradient(135deg,#ff9ecf,#ffd6ec,#ffe6f5);
     height:100vh;
     display:flex;
@@ -18,116 +18,138 @@ body{
     text-align:center;
 }
 
+/* CARD */
 .card{
     background:white;
     padding:40px;
     border-radius:30px;
-    box-shadow:0 15px 40px rgba(255,0,130,.3);
-    position:relative;
-    max-width:350px;
+    box-shadow:0 20px 50px rgba(255,0,130,.3);
+    max-width:360px;
 }
 
-h1{color:#ff4f9a;}
-p{color:#555;}
-
-button{
-    border:none;
-    padding:12px 28px;
-    font-size:18px;
-    border-radius:50px;
-    cursor:pointer;
-    transition:.3s;
+/* FOTO */
+.photo{
+    width:220px;
+    border-radius:25px;
+    margin:20px 0;
+    animation:zoom 6s infinite alternate;
 }
 
-#yes{background:#ff4f9a;color:white;}
-#no{background:#eee;color:#666;position:absolute;}
-
-.gift{display:none;animation:pop 1s;}
-
-@keyframes pop{
-    from{opacity:0; transform:scale(.4)}
-    to{opacity:1; transform:scale(1)}
+@keyframes zoom{
+    from{transform:scale(1)}
+    to{transform:scale(1.1)}
 }
 
+/* TEXT KETIK */
+.typing{
+    font-size:22px;
+    color:#ff4f9a;
+    min-height:60px;
+}
+
+/* HEART */
 .heart{
     position:absolute;
-    animation:float 5s linear infinite;
+    animation:float 6s linear infinite;
 }
 
 @keyframes float{
-    from{transform:translateY(0); opacity:1}
-    to{transform:translateY(-800px); opacity:0}
+    from{transform:translateY(0);opacity:1}
+    to{transform:translateY(-900px);opacity:0}
 }
 
-.gif{
-    width:90px;
-    margin:10px;
+/* BUTTON */
+button{
+    border:none;
+    padding:14px 30px;
+    font-size:18px;
+    border-radius:50px;
+    cursor:pointer;
+    background:#ff4f9a;
+    color:white;
 }
 </style>
 </head>
 
 <body>
 
-<!-- MUSIK DARI FILE SENDIRI -->
+<!-- LAGU -->
 <audio id="bgm" loop>
-    <source src="Westlife_-_Beautiful_In_White_(mp3.pm).mp3" type="audio/mp3">
+<source src="Westlife_-_Beautiful_In_White_(mp3.pm).mp3" type="audio/mp3">
 </audio>
 
-<div class="card">
+<div class="card" id="card">
 
-<div id="question">
-    <h1>💖 Rifa Fazri Tefani 💖</h1>
-    <p>Mau jadi Valentine aku selamanya? 🥺</p>
+<h2 class="typing" id="typing"></h2>
 
-    <button id="yes">YES 💕</button>
-    <button id="no">NO 😝</button>
-</div>
+<img src="rifa.jpg" class="photo">
 
-<div class="gift" id="gift">
-
-    <h1>YEEAAYY MAKASIH SAYANG ❤️</h1>
-
-    <p style="font-size:20px">
-    Kamu itu alasan aku bahagia setiap hari 💖<br>
-    Senyummu bikin dunia jadi lebih indah ✨<br>
-    Aku sayang kamu lebih dari kata-kata 🥰
-    </p>
-
-    <div>
-        <img class="gif" src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
-        <img class="gif" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
-        <img class="gif" src="https://media.giphy.com/media/11sBLVxNs7v6WA/giphy.gif">
-    </div>
-
-</div>
+<button onclick="startLove()">Buka Pesan ❤️</button>
 
 </div>
 
 <script>
-const bgm = document.getElementById("bgm");
-const yes = document.getElementById("yes");
-const no = document.getElementById("no");
-const gift = document.getElementById("gift");
-const question = document.getElementById("question");
+const text = [
+ "Hai Sayang ku Yang Paling Cantik 🥰",
+ "Aku mau bilang sesuatu…",
+ "Terima kasih sudah hadir di hidupku…",
+ "Kamu itu alasan aku tersenyum setiap hari…",
+ "Tanpamu dunia terasa sepi…",
+ "Aku sayang kamu…",
+ "Hari ini… besok… dan selamanya ❤️",
+ "Dari Husein🫶"
+];
 
-let size = 1;
+let i=0, j=0;
+const typing=document.getElementById("typing");
 
-/* AUTOPLAY FIX HP */
-function startMusic(){
-    bgm.play();
-    document.removeEventListener("click", startMusic);
-    document.removeEventListener("touchstart", startMusic);
+function type(){
+ if(i<text.length){
+  if(j<text[i].length){
+   typing.innerHTML+=text[i][j];
+   j++;
+   setTimeout(type,50);
+  }else{
+   typing.innerHTML+="<br>";
+   i++; j=0;
+   setTimeout(type,900);
+  }
+ }
 }
 
-document.addEventListener("click", startMusic);
-document.addEventListener("touchstart", startMusic);
+type();
 
-/* tombol NO kabur */
-no.addEventListener("mouseover",()=>{
-    const x=Math.random()*(window.innerWidth-100);
-    const y=Math.random()*(window.innerHeight-100);
-    no.style.left=x+"px";
-    no.style.top=y+"px";
+/* START LOVE MODE */
+function startLove(){
+
+ const bgm=document.getElementById("bgm");
+ bgm.volume=0;
+ bgm.play();
+
+ // fade in musik
+ let v=0;
+ const fade=setInterval(()=>{
+   if(v<1){ v+=0.02; bgm.volume=v; }
+   else clearInterval(fade);
+ },100);
+
+ // hujan hati
+ setInterval(()=>{
+  let h=document.createElement("div");
+  h.innerHTML="💞";
+  h.className="heart";
+  h.style.left=Math.random()*100+"vw";
+  h.style.top="100vh";
+  h.style.fontSize=(20+Math.random()*50)+"px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+ },200);
+
+}
+</script>
+
+</body>
+</html>    no.style.top=y+"px";
     size+=0.25;
     yes.style.transform="scale("+size+")";
 });
